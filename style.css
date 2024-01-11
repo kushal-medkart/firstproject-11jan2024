@@ -1,5 +1,6 @@
 @font-face {
 	font-family: 'papercutfont';
+	font-weight: 800 800;
 /*	src: url('fonts/CaviarDreams-Italic.eot'); // IE9 Compat Modes */
 /*	src: url('fonts/CaviarDreams-Italic.eot?#iefix') format('embedded-opentype'),  //IE6-IE8 */
 /*	url('fonts/CaviarDreams-Italic.svg#svgFontName') format('svg'); // Legacy iOS */
@@ -23,6 +24,7 @@ html, body {
 
 .categories-wrapper {
 	position: relative;
+	margin-top: 45px;
 }
 .category-input {
 	position: absolute;
@@ -34,8 +36,6 @@ html, body {
 
 }
 
-.boximage {
-}
 
 .category-input:checked + label{
 	background: url("/assets/pixil-frame-0.png"); /* put your image here*/
