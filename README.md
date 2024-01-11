@@ -12,6 +12,14 @@ CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
 /* grant all priveleges to user
 GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
 
-FLUSH PRIVELEGES;
+FLUSH PRIVILEGES;
+```
+
+```sql
+create database todo;
+
+use todo;
+
+create table tasks (title varchar(256), description varchar(1024));
 ```
 
