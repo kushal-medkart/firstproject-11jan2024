@@ -21,9 +21,9 @@
   <body>
     <h3>NEW TASK CREATION</h3>
     <form>
-      <span>An input field:</span>
+      <span>Title:</span>
       <input type="text">
-      <span>A textarea field:</span>
+      <span>Description:</span>
       <textarea></textarea>
 	<br>
 	<br>
