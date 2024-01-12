@@ -19,7 +19,27 @@ body {
 	border-radius: 2px;
 }
 
+@font-face {
+	font-family: "Salsa-Regular";
+	src: "/assets/Salsa-Regular.ttf" format('truetype'),
+}
+
+@font-face {
+	font-family: "RobotoMono";
+	src: "/assets/RobotoMono-VariableFont_wght.ttf" format('truetype'),
+}
+
+@font-face {
+  font-family: "Kanit-ExtraLight";
+  src: url("/assets/Kanit-ExtraLight.ttf") format('truetype'),
+}
+
+@font-face {
+  font-family: "Lemon-Regular";
+  src: url("/assets/Lemon-Regular.ttf") format('truetype'),
+}
 .todotitle {
+	font-family: "Lemon-Regular";
 	font-weight: bold;
 	font-size: 2em;
 	margin-top: 0.7em;
@@ -30,6 +50,8 @@ body {
 }
 .maketodotitle {
 	/*font-weight: bold; */
+	font-family: "RobotoMono";
+	color: white;
 	font-size: 1em;
 	margin-left: 2em;
 	margin-top: 3px;

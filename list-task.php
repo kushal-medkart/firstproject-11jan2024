@@ -26,7 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		header('Location: /list-task.php');
 		exit();
 	} else if (isset($_REQUEST["EDIT"])) {
-		exit();
+		$sql = sprintf('SET @row_number = -1;');
+		$conn->query($sql);
+		$sql = sprintf("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=%s", $_REQUEST["EDIT"]);
+		$result = $conn->query($sql);
+		$row = $result->fetch_row();
+		header('Location: /edit-task.php?title='.$row[0].'&description='.$row[1]);
+	} else if (isset($_REQUEST["START"])) {
+
+	} else if (isset($_REQUEST["FINISH"])) {
+
 	}
 }
 ?>
@@ -35,7 +44,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 table tr td{
 border: 1px solid black;
 }
+table tr:nth-child(1), tr:nth-child(2) {
+	font-family: "Salsa-Regular";
+}
+.card {
+background-color: white;
+}
 
+.notetitle {
+	font-family: "Lemon-regular"
+}
+
+.notedescription {
+	font-family: "Kanit-ExtraLight";
+	padding-left: 2px;
+}
+.entrytext {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	color: white;
+	text-shadow: 1px 2px #000000;
+	font-family: "Lemon-Regular";
+}
 table { 
     border-spacing: 0px;
     border-collapse: separate;
@@ -57,27 +89,27 @@ table {
 </div>
 <div style="position: absolute;  margin: 0 auto;   left: 20%;
   right: 10%;">
-<h2>Please validate todo</h2>
+<div class=entrytext>Please validate todo</div>
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 
 <?php
 
 $sql=sprintf("select * from tasks");
-$resultanthtml = "<table>";
+$resultanthtml = "<div>";
 $result = $conn->query($sql);
 
 $rows = $result->fetch_all();
 
 for ($rowIndex = 0; $rowIndex < count($rows); $rowIndex++) {
-	$resultanthtml .= sprintf ('<tr><td>%s</td><td>%s</td>', $rows[$rowIndex][0], $rows[$rowIndex][1]);
+	$resultanthtml .= sprintf ('<div><div style="background-color: white;   box-shadow: 5px 10px #0000003f;padding: 2px; width: 190px; margin: 10px;float: left;"><div class=notetitle>%s</div><div class=notedescription>%s</div>', $rows[$rowIndex][0], $rows[$rowIndex][1]);
 
 	$option = array("EDIT", "DELETE", "START", "FINISH");
 	for ($i = 0; $i < count($option); $i++)
-		$resultanthtml .= sprintf('<td>
-		<button type="submit" name="%s" value="%s">%s</button></td></td>', $option[$i], $rowIndex, $option[$i]); 
-	$resultanthtml .= '</tr>';
+		$resultanthtml .= sprintf('<div>
+		<button type="submit" style="float: left; margin: 1px;font-family: Kanit-ExtraLight" name="%s" value="%s">%s</button></div>', $option[$i], $rowIndex, $option[$i]); 
+	$resultanthtml .= '</div></div>';
 }
-echo $resultanthtml . "</table>";
+echo $resultanthtml . "</div>";
 ?>
 </form>
 </div>

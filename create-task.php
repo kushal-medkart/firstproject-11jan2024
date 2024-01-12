@@ -17,19 +17,23 @@
         outline: none;
       }
 .createtaskbox {
-	background-color: black; 
+	background-color: #030303ff; 
 	border: 2px solid #9c7248;
 }
 
 
+ .createtaskbox input[type=submit]{
+	font-family: "Lemon-Regular"
+}
  .createtaskbox input[type=text]{
 	background-color: black;
 	border-top: 0;
 	border-right: 0;
 	border-left: 0;
-	border-bottom: 2px white blue;
 	color: white;
+	border-bottom: 2px white blue;
 	margin: 8px;
+	font-family: "Lemon-Regular";
 }
  .createtaskbox textarea{
 	background-color: black;
@@ -38,6 +42,7 @@
 	border-left: 0;
 	color: white;
 	border-bottom: 2px white blue;
+	font-family: "Lemon-Regular";
 }
 
 .createtaskbox {
@@ -45,14 +50,17 @@
 }
 .createtaskbox span{
 	color: white;
+	font-family: "Lemon-Regular";
 }
 
 .entrytext {
 	font-weight: bold;
 	font-size: 1.5em;
-	margin: 1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	color: white;
 	text-shadow: 1px 2px #000000;
+	font-family: "Lemon-Regular";
 }
     </style>
 <?php
@@ -101,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   right: 10%;">
 <div class=entrytext>Please Enter Title and Description</div>
 <div class="createtaskbox">
-    <form method="post" action="<?php echo $_SERVER[" PHP_SELF "];?>">
+    <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 	<div style="display:flex;">
       <span>Title:</span>
       <input type="text" name="title">
