@@ -1,0 +1,60 @@
+body {
+	background-color: #BDD5E7;
+	display: grid;
+	place-items: center;
+}
+
+.titleimg {
+	margin-left: 18px;
+}
+
+.banner {
+	background-color: orange;
+	background: linear-gradient(to bottom, rgba(255, 122, 89,1), rgba(255, 122, 89,0.4));
+	width: 80%;
+	height: 120px;
+	display: flex;
+	margin-bottom: 20px;
+	border: 4px solid grey;
+	border-radius: 2px;
+}
+
+.todotitle {
+	font-weight: bold;
+	font-size: 2em;
+	margin-top: 0.7em;
+	margin-left: 25px;
+	padding: 3px;
+	color: white;
+	text-shadow: 1px 2px #000000;
+}
+.maketodotitle {
+	/*font-weight: bold; */
+	font-size: 1em;
+	margin-left: 2em;
+	margin-top: 3px;
+	padding: 3px;
+	color: black;
+	/*text-shadow: 1px 2px #ffffff; */
+}
+.todocontainer {
+	border: 3px solid grey;
+	background-color: #C60C30;
+	width: 70%;
+	height: 300px;
+	position: relative;
+	padding-bottom: 50px;
+	border-radius: 2px;
+	border-color: #9c7248;
+}
+
+
+
+.stylestimg {
+	background-image: url("/assets/todo_list.png");
+	background-size: 100px 100px;
+	height: 100%;
+	width: 100px;
+	position: absolute;
+}
+
