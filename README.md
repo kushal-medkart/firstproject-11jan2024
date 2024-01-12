@@ -1,7 +1,7 @@
 # First Project
-# PHP Version support
+- PHP Version support
 
-# CheckBox uses input element with css to reduce javascript overhead
+- CheckBox uses input element with css to reduce javascript overhead
 # 
 
 ```sql
@@ -15,6 +15,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
+taskes database
 ```sql
 create database todo;
 
