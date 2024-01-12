@@ -41,10 +41,13 @@ table {
 $sql=sprintf("select * from tasks");
 echo "<table>";
 $result = $conn->query($sql);
-
 $value=0;
+
 while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-echo sprintf ("<tr><td>%s</td><td>%s</td><td><button type=\"submit\" name=\"edit\" value=\"%s\"></button></td><td><input type=\"submit\" name=\"delete\" value=\"DELETE\"></td>", $row["title"], $row["description"]);
+	echo sprintf ('<tr><td>%s</td><td>%s</td>
+		<td><button type="submit" name="edit" value="%s">EDIT</button></td>
+		<td><button type="submit" name="delete" value="%s">DELETE</button>
+	</td></tr>', $row["title"], $row["description"], $value, $value);
 $value+=1;
 }
 
