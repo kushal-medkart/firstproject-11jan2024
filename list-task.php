@@ -117,6 +117,14 @@ echo $resultanthtml . "</div>";
 
 <?PHP $conn->close(); ?>
 <script> 
+const startelems = document.querySelectorAll("button[name=START]");
+for (const startelem of startelems)
+{
+
+startelem.addEventListener("click", function(e) {
+
+});
+}
 const deleteElems = document.querySelectorAll("button[name=DELETE]");
 for (const deleteElem of deleteElems)
 {
