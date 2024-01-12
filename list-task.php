@@ -17,6 +17,11 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_REQUEST["delete"])) {
+
+	} else if (isset($_REQUEST["edit"])) {
+
+	}
 	echo var_dump($_REQUEST);
 }
 ?>
