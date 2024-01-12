@@ -44,19 +44,21 @@ table {
 <?php
 
 $sql=sprintf("select * from tasks");
-echo "<table>";
+$resultanthtml = "<table>";
 $result = $conn->query($sql);
-$value=0;
 
-while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-	echo sprintf ('<tr><td>%s</td><td>%s</td>
-		<td><button type="submit" name="edit" value="%s">EDIT</button></td>
-		<td><button type="submit" name="delete" value="%s">DELETE</button>
-	</td></tr>', $row["title"], $row["description"], $value, $value);
-$value+=1;
+$rows = $result->fetch_all();
+
+for ($rowIndex = 0; $rowIndex < count($rows); $rowIndex++) {
+	$resultanthtml .= sprintf ('<tr><td>%s</td><td>%s</td>', $rows[$rowIndex][0], $rows[$rowIndex][1]);
+
+	$option = array("EDIT", "DELETE", "START", "FINISH");
+	for ($i = 0; $i < count($option); $i++)
+		$resultanthtml .= sprintf('<td>
+		<button type="submit" name="%s" value="%s">%s</button></td></td>', $option[$i], $rowIndex, $option[$i]); 
+	$resultanthtml .= '</tr>';
 }
-
-echo "</table>";
+echo $resultanthtml . "</table>";
 ?>
 </form>
 
