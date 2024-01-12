@@ -21,7 +21,7 @@ create database todo;
 
 use todo;
 
-create table tasks (title varchar(256), description varchar(1024));
+create table tasks (title varchar(256), description varchar(1024), status boolean);
 ```
 
 
