@@ -58,3 +58,24 @@
 	font-family: "Lemon-Regular";
 }
 
+.cardtitle {
+	background-color: white;   
+	box-shadow: 5px 10px #0000003f;
+	padding: 2px;
+       	width: 190px;
+       	margin: 10px;
+	float: left;
+}
+
+.cardbutton {
+	float: left;
+	margin: 1px;
+	font-family: "Kanit-ExtraLight";
+}
+
+.todocontainerbox {
+	position: absolute;
+	margin: 0 auto;
+	left: 20%;
+	right: 10%;
+}

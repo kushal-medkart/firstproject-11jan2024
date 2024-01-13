@@ -4,6 +4,7 @@
 <title>Edit Delete Task</title>
 <link rel=stylesheet href="/background.css">
 <?php
+include_once "background.php";
 
 $servername="localhost";
 $username="user";
@@ -68,18 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel=stylesheet href=list-task.css>
 </head>
 <body>
-<div class="banner">
-<img src="/images/todo_list.png" class=titleimg>
-<div>
-<div class=todotitle>Todo.net</div>
-<div class=maketodotitle>Make your Todo here and let it available everywhere</div></div>
-</div>
 
-<div class=todocontainer>
-<div class=stylestimg></div>
-<div class=stylestimg1></div>
-<div class=todocontainerbox>
+<?php bannertop(); ?>
 <div class=entrytext>Please validate todo</div>
+<div class=todocontainerchildbox>
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 
 <?php
@@ -103,7 +96,7 @@ echo $resultanthtml . "</div>";
 ?>
 </form>
 </div>
-</div>
+<?php bannerbottom(); ?>
 
 <?PHP $conn->close(); ?>
 <script> 

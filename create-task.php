@@ -2,8 +2,9 @@
 <html>
   <head>
     <title>Title of the document</title>
-<link rel=stylesheet href=create-task.css>
+<link rel=stylesheet href="/create-task.css">
 <?php
+include_once("background.php");
 $servername="localhost";
 $username="user";
 $password="password";
@@ -31,18 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel=stylesheet href="/background.css">
   </head>
   <body>
-<div class="banner">
-<img src="/images/todo_list.png" class=titleimg>
-<div>
-<div class=todotitle>Todo.net</div>
-<div class=maketodotitle>Make your Todo here and let it available everywhere</div>
-</div>
-</div>
-
-<div class=todocontainer>
-<div class=stylestimg></div>
-<div class=stylestimg1></div>
-<div class=todocontainer>
+<?php bannertop(); ?>
 <div class=entrytext>Please Enter Title and Description</div>
 <div class="createtaskbox">
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
@@ -57,6 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<br>
 	<input type=submit value=submit>
     </form>
-</div>
+<?php bannerbottom(); ?>
   </body>
 </html>
