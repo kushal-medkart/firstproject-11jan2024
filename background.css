@@ -73,7 +73,7 @@ body {
 
 
 .stylestimg {
-	background-image: url("/assets/todo_list.png");
+	background-image: url("/images/todo_list.png");
 	transform: rotate(180deg);
 	background-size: 100px 100px;
 	height: 100%;
@@ -85,7 +85,7 @@ body {
 }
 
 .stylestimg1 {
-	background-image: url("/assets/todo_list.png");
+	background-image: url("/images/todo_list.png");
 	background-size: 100px 100px;
 	height: 100%;
 	width: 100px;

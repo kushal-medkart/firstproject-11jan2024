@@ -69,15 +69,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="banner">
-<img src="/assets/todo_list.png" class=titleimg>
+<img src="/images/todo_list.png" class=titleimg>
 <div>
 <div class=todotitle>Todo.net</div>
 <div class=maketodotitle>Make your Todo here and let it available everywhere</div></div>
 </div>
 
-<div class="todocontainer">
+<div class=todocontainer>
 <div class=stylestimg></div>
-<div class="stylestimg1"></div>
+<div class=stylestimg1></div>
 <div class=todocontainerbox>
 <div class=entrytext>Please validate todo</div>
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
