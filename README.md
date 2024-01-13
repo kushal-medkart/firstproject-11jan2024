@@ -21,12 +21,12 @@ create database todo;
 
 use todo;
 
-create table tasks (title varchar(256), description varchar(1024), status boolean);
+create table tasks (title varchar(256) NOT NULL, description varchar(1024), status boolean, PRIMARY KEY(title));
 ```
 
 
-![](/assets/Screenshot0.png)
+![](/images/Screenshot0.png)
 
-![](/assets/Screenshot1.png)
+![](/images/Screenshot1.png)
 
 

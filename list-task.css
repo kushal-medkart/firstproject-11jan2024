@@ -1,0 +1,52 @@
+table tr td{
+border: 1px solid black;
+}
+table tr:nth-child(1), tr:nth-child(2) {
+	font-family: "Salsa-Regular";
+}
+.card {
+background-color: white;
+}
+
+.notetitle {
+	font-family: "Lemon-regular"
+}
+
+.notedescription {
+	font-family: "Kanit-ExtraLight";
+	padding-left: 2px;
+}
+.entrytext {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	color: white;
+	text-shadow: 1px 2px #000000;
+	font-family: "Lemon-Regular";
+}
+table { 
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+.cardtitle {
+	background-color: white;   
+	box-shadow: 5px 10px #0000003f;
+	padding: 2px;
+       	width: 190px;
+       	margin: 10px;
+	float: left;
+}
+
+.cardbutton {
+	float: left;
+	margin: 1px;
+	font-family: "Kanit-ExtraLight";
+}
+
+.todocontainerbox {
+	position: absolute;
+	margin: 0 auto;
+	left: 20%;
+	right: 10%;
+}

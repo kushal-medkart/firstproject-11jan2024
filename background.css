@@ -41,10 +41,10 @@ body {
 .todotitle {
 	font-family: "Lemon-Regular";
 	font-weight: bold;
-	font-size: 2em;
-	margin-top: 0.7em;
+	font-size: 3.8em;
+	margin-top: 0em;
 	margin-left: 25px;
-	padding: 3px;
+	padding: 0px;
 	color: white;
 	text-shadow: 1px 2px #000000;
 }
@@ -54,8 +54,8 @@ body {
 	color: white;
 	font-size: 1em;
 	margin-left: 2em;
-	margin-top: 3px;
-	padding: 3px;
+	margin-top: 0px;
+	padding: 0px;
 	color: black;
 	/*text-shadow: 1px 2px #ffffff; */
 }
@@ -74,9 +74,20 @@ body {
 
 .stylestimg {
 	background-image: url("/assets/todo_list.png");
+	transform: rotate(180deg);
+	background-size: 100px 100px;
+	height: 100%;
+	width: 100px;
+	position: absolute;
+	margin-left: 50%;
+	right:20%;
+	left:10%;
+}
+
+.stylestimg1 {
+	background-image: url("/assets/todo_list.png");
 	background-size: 100px 100px;
 	height: 100%;
 	width: 100px;
 	position: absolute;
 }
-

@@ -77,7 +77,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$sql = sprintf("INSERT INTO tasks VALUES (\"%s\", \"%s\")", $_REQUEST["title"], $_REQUEST["description"]);
+	$sql = sprintf("INSERT INTO tasks VALUES (\"%s\", \"%s\", FALSE)", $_REQUEST["title"], $_REQUEST["description"]);
 	if ($conn->query($sql) === TRUE) {
 		$conn->close();
 		header('Location: /list-task.php');
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="todocontainer">
 <div class="stylestimg" style="left:10%">
 </div>
-<div class="stylestimg" style="margin-left: 50%;right:20%">
+<div class="stylestimg1" style="margin-left: 50%;right:20%">
 </div>
 
 <div style="position: absolute;  margin: 0 auto;   left: 20%;
