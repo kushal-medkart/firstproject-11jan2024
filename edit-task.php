@@ -17,15 +17,13 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$sql = sprintf("UPDATE tasks SET description='%s' where title='%s'", $_REQUEST["description"], $_REQUEST["title"]);
-	if ($conn->query($sql) === TRUE) {
-		$conn->close();
-		header('Location: /list-task.php');
-	}
-	else {
-		echo "Error: " . $sql . "<br>". $conn->error;
-	}
+if (($_SERVER["REQUEST_METHOD"] == "POST") && $_REQUEST["description"] == "") {
+	$stmt=$conn->prepare("UPDATE tasks SET description=? where title=?");
+	$stmt=bind_param("ss", $_REQUEST["description"], $_REQUEST["title"]);
+	$stmt->execute();
+	$stmt->close();
+	$conn->close();
+	header('Location: /list-task.php');
 	exit();
 }
 ?>

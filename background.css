@@ -18,6 +18,11 @@
   src: url("/assets/Lemon-Regular.ttf") format('truetype'),
 }
 
+@font-face {
+	font-family: "DMSerifDisplay-Regular"
+	src: url("/assets/DMSerifDisplay-Regular.ttf") format('truetype'),
+}
+
 body {
 	background-color: #BDD5E7;
 	display: grid;
@@ -39,26 +44,29 @@ body {
 	border-radius: 2px;
 }
 
+.todotitle sup {
+	font-size: 0.5em;
+}
 .todotitle {
-	font-family: "Lemon-Regular";
+	font-family:  "Lemon-Regular";
 	font-weight: bold;
-	font-size: 3.0em;
-	margin-top: 10px;
+	font-size: 4.0em;
+	margin-top: 5px;
 	margin-left: 30px;
 	padding: 0px;
 	color: white;
-	text-shadow: 1px 2px #000000;
+	text-shadow: 3px 4px #000000;
 }
 .maketodotitle {
 	/*font-weight: bold; */
 	font-family: "RobotoMono";
+	font-weight: bold;
 	color: white;
 	font-size: 1em;
 	margin-left: 2em;
 	margin-top: 0px;
 	padding: 0px;
-	color: black;
-	/*text-shadow: 1px 2px #ffffff; */
+	text-shadow: 2px 1px #000000; 
 }
 .todocontainer {
 	border: 3px solid grey;

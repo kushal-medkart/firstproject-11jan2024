@@ -22,27 +22,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_REQUEST["DELETE"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
-		$sql = sprintf("delete from tasks where title=(select title from (SELECT title, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=%s)", $_REQUEST["DELETE"]);
-		$conn->query($sql);
+		$_REQUEST["DELETE"]
+		$stmt = $conn->prepare("delete from tasks where title=(select title from (SELECT title, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?)");
+
+		$stmt->bind_param("s", $_REQUEST["DELETE"]);
+		$stmt->execute();
+		$stmt->close();
+		$conn->close();
 		header('Location: /list-task.php');
 		exit();
 	} else if (isset($_REQUEST["EDIT"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
-		$sql = sprintf("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=%s", $_REQUEST["EDIT"]);
-		$result = $conn->query($sql);
-		$row = $result->fetch_row();
-		header('Location: /edit-task.php?title='.$row[0].'&description='.$row[1]);
+		$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
+
+		$stmt->bind_param("s", $_REQUEST["EDIT"]);
+		$stmt->execute();
+
+		// instead of biind_result
+		$result = $stmt->get_result();
+
+		$row = $result->fetch_assoc();
+		header('Location: /edit-task.php?title='.$row[$_REQUEST['title']].'&description='.$row['description']);
 	} else if (isset($_REQUEST["START"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
-		$sql = sprintf("select title,description,status from (SELECT title, description, status, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=%s", $_REQUEST["START"]);
-		$result = $conn->query($sql);
-		$row = $result->fetch_row();
-		if ($row[2] == FALSE)
+		$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
+
+		$stmt->bind_param("s", $_REQUEST["START"]);
+		$stmt->execute();
+
+		// instead of biind_result
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		if ($row["status"] == FALSE)
 		{
-			$sql=sprintf("UPDATE tasks set status=TRUE where title='%s'", $row[0]);
-			$conn->query($sql);
+			$stmt=$conn->prepare("UPDATE tasks set status=TRUE where title=?");
+			$stmt->bind_param("s", $_REQUEST["title"]);
+			$stmt->execute();
+			$stmt->close();
 			echo "TASK STARTED";
 
 		} else {
@@ -51,13 +69,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else if (isset($_REQUEST["FINISH"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
-		$sql = sprintf("select title,description,status from (SELECT title, description, status, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=%s", $_REQUEST["FINISH"]);
-		$result = $conn->query($sql);
-		$row = $result->fetch_row();
-		if ($row[2] == TRUE)
+		$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
+
+		$stmt->bind_param("s", $_REQUEST["START"]);
+		$stmt->execute();
+
+		// instead of biind_result
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		if ($row["status"] == TRUE)
 		{
-			$sql=sprintf("UPDATE tasks set status=FALSE where title='%s'", $row[0]);
-			$conn->query($sql);
+			$stmt=$conn->prepare("UPDATE tasks set status=FALSE where title=?");
+			$stmt->bind_param("s", $_REQUEST["title"]);
+			$stmt->execute();
+			$stmt->close();
 			echo "TASK COMPLETED";
 		} else {
 			echo "TASK ALREADY COMPLETED";

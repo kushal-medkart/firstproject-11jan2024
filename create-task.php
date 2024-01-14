@@ -17,14 +17,15 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$sql = sprintf("INSERT INTO tasks VALUES (\"%s\", \"%s\", FALSE)", $_REQUEST["title"], $_REQUEST["description"]);
-	if ($conn->query($sql) === TRUE) {
+// valid title and descriptions are accepted
+	if (($_SERVER["REQUEST_METHOD"] == "POST") && (($_REQUEST["title"] == "") || ($_REQUEST["description"] == ""))) {
+		$stmt = $conn->prepare("INSERT INTO tasks VALUES (?, ?, FALSE)");
+		$stmt->bind_param("ss", $_REQUEST["title"], $_REQUEST["description"]);
+
+		$stmt->execute();
+		$stmt->close();
 		$conn->close();
 		header('Location: /list-task.php');
-	}
-	else {
-		echo "Error: " . $sql . "<br>". $conn->error;
 	}
 	exit();
 }
