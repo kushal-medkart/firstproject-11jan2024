@@ -21,7 +21,7 @@
 	font-family: "Lemon-Regular"
 }
  .createtaskbox input[type=text]{
-	background-color: black;
+	background-color: #030303ff;
 	border-top: 0;
 	border-right: 0;
 	border-left: 0;
@@ -31,7 +31,7 @@
 	font-family: "Lemon-Regular";
 }
  .createtaskbox textarea{
-	background-color: black;
+	background-color: #030303ff;
 	border-top: 0;
 	border-right: 0;
 	border-left: 0;

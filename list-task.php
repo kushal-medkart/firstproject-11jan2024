@@ -18,10 +18,24 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+function findTitleFromRowNum() {
+	$sql = sprintf('SET @row_number = -1;');
+	$conn->query($sql);
+	$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
+
+	$stmt->bind_param("s", $_REQUEST["START"]);
+	$stmt->execute();
+
+	// get result
+	$result = $stmt->get_result();
+	return $result->fetch_assoc();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (isset($_REQUEST["DELETE"])) {
+	if (isset($_REQUEST["DELETE"]) && $_REQUEST["DELETE"] != "null") {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
+		// search with row number
 		$stmt = $conn->prepare("delete from tasks where title=(select title from (SELECT title, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?)");
 
 		$stmt->bind_param("s", $_REQUEST["DELETE"]);
@@ -31,31 +45,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		header('Location: /list-task.php');
 		exit();
 	} else if (isset($_REQUEST["EDIT"])) {
-		$sql = sprintf('SET @row_number = -1;');
-		$conn->query($sql);
-		$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
-
-		$stmt->bind_param("s", $_REQUEST["EDIT"]);
-		$stmt->execute();
-
-		// instead of biind_result
-		$result = $stmt->get_result();
-
-		$row = $result->fetch_assoc();
+		$row = findTitleFromRowNum();
 		header('Location: /edit-task.php?title='.$row['title'].'&description='.$row['description']);
 	} else if (isset($_REQUEST["START"])) {
-		$sql = sprintf('SET @row_number = -1;');
-		$conn->query($sql);
-		$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
 
-		$stmt->bind_param("s", $_REQUEST["START"]);
-		$stmt->execute();
-
-		// instead of biind_result
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
+		$row = findTitleFromRowNum();
 		if ($row["status"] == FALSE)
 		{
+			// update status value for given title
 			$stmt=$conn->prepare("UPDATE tasks set status=TRUE where title=?");
 			$stmt->bind_param("s", $_REQUEST["title"]);
 			$stmt->execute();
@@ -66,16 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			echo "TASK ALREADY STARTED";
 		}
 	} else if (isset($_REQUEST["FINISH"])) {
-		$sql = sprintf('SET @row_number = -1;');
-		$conn->query($sql);
-		$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
-
-		$stmt->bind_param("s", $_REQUEST["START"]);
-		$stmt->execute();
-
-		// instead of biind_result
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
+		$row=findTitleFromRowNum();
+		// finish
 		if ($row["status"] == TRUE)
 		{
 			$stmt=$conn->prepare("UPDATE tasks set status=FALSE where title=?");
@@ -100,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 
 <?php
-
+// list all title and description for todo
 $sql=sprintf("select * from tasks");
 $resultanthtml = "<div>";
 $result = $conn->query($sql);
@@ -128,14 +117,8 @@ const deleteElems = document.querySelectorAll("button[name=DELETE]");
 for (const deleteElem of deleteElems)
 {
 deleteElem.addEventListener("click", function(e) {
-if (confirm('Please confirm deletion') === true) {
-	const formData = new FormData(document.querySelector("form"));
-	fetch("/list-task.php", {
-		method:"POST",
-		body:formData
-	});
-} else {
-	location.href="/list-task.php";
+if (confirm('Please confirm deletion') === false) {
+	e.srcElement.value = null;
 }
 });
 }
