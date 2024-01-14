@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_REQUEST["DELETE"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
-		$_REQUEST["DELETE"]
 		$stmt = $conn->prepare("delete from tasks where title=(select title from (SELECT title, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?)");
 
 		$stmt->bind_param("s", $_REQUEST["DELETE"]);
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$result = $stmt->get_result();
 
 		$row = $result->fetch_assoc();
-		header('Location: /edit-task.php?title='.$row[$_REQUEST['title']].'&description='.$row['description']);
+		header('Location: /edit-task.php?title='.$row['title'].'&description='.$row['description']);
 	} else if (isset($_REQUEST["START"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);

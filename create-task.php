@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title of the document</title>
+<title>Title of the document</title>
 <link rel=stylesheet href="/create-task.css">
 <?php
 include_once("background.php");
@@ -18,16 +18,14 @@ if ($conn->connect_error) {
 }
 
 // valid title and descriptions are accepted
-	if (($_SERVER["REQUEST_METHOD"] == "POST") && (($_REQUEST["title"] == "") || ($_REQUEST["description"] == ""))) {
-		$stmt = $conn->prepare("INSERT INTO tasks VALUES (?, ?, FALSE)");
-		$stmt->bind_param("ss", $_REQUEST["title"], $_REQUEST["description"]);
+if (($_SERVER["REQUEST_METHOD"] == "POST") && (($_REQUEST["title"] != "") && ($_REQUEST["description"] != ""))) {
+	$stmt = $conn->prepare("INSERT INTO tasks VALUES (?, ?, FALSE)");
+	$stmt->bind_param("ss", $_REQUEST["title"], $_REQUEST["description"]);
 
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
-		header('Location: /list-task.php');
-	}
-	exit();
+	$stmt->execute();
+	$stmt->close();
+	$conn->close();
+	header('Location: /list-task.php');
 }
 ?>
 <link rel=stylesheet href="/background.css">

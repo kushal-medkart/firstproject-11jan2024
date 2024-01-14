@@ -17,9 +17,9 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if (($_SERVER["REQUEST_METHOD"] == "POST") && $_REQUEST["description"] == "") {
+if (($_SERVER["REQUEST_METHOD"] == "POST") && $_REQUEST["description"] != "") {
 	$stmt=$conn->prepare("UPDATE tasks SET description=? where title=?");
-	$stmt=bind_param("ss", $_REQUEST["description"], $_REQUEST["title"]);
+	$stmt->bind_param("ss", $_REQUEST["description"], $_REQUEST["title"]);
 	$stmt->execute();
 	$stmt->close();
 	$conn->close();
