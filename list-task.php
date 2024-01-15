@@ -18,12 +18,12 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-function findTitleFromRowNum() {
-	$sql = sprintf('SET @row_number = -1;');
+function findTitleFromRowNum($conn, $row_num) {
+	$sql = 'SET @row_number = -1';
 	$conn->query($sql);
 	$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
 
-	$stmt->bind_param("s", $_REQUEST["START"]);
+	$stmt->bind_param("s", $row_num);
 	$stmt->execute();
 
 	// get result
@@ -45,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		header('Location: /list-task.php');
 		exit();
 	} else if (isset($_REQUEST["EDIT"])) {
-		$row = findTitleFromRowNum();
+		$row = findTitleFromRowNum($conn, $_REQUEST["EDIT"]);
 		header('Location: /edit-task.php?title='.$row['title'].'&description='.$row['description']);
 	} else if (isset($_REQUEST["START"])) {
 
-		$row = findTitleFromRowNum();
+		$row = findTitleFromRowNum($conn, $_REQUEST["START"]);
 		if ($row["status"] == FALSE)
 		{
 			// update status value for given title
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			echo "TASK ALREADY STARTED";
 		}
 	} else if (isset($_REQUEST["FINISH"])) {
-		$row=findTitleFromRowNum();
+		$row=findTitleFromRowNum($conn, $_REQUEST["FINISH"]);
 		// finish
 		if ($row["status"] == TRUE)
 		{

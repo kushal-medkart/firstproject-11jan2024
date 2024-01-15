@@ -15,6 +15,13 @@ echo '<link rel=stylesheet href="/background.css">
 }
 
 function bannerbottom() {
-	echo '</div></div>';
+	echo '</div></div>
+		<script>const banner=document.querySelector(".banner");
+		banner.style.cursor = "pointer";
+		banner.addEventListener("click", function()  {
+			location.href="/create-task.php";
+			console.log("heloworld");
+		});
+		</script>';
 }
 ?>
