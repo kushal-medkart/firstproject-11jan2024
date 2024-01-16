@@ -98,7 +98,7 @@ $result = $conn->query($sql);
 $rows = $result->fetch_all();
 
 for ($rowIndex = 0; $rowIndex < count($rows); $rowIndex++) {
-	$resultanthtml .= sprintf ('<div><div class=cardtitle><div class=notetitle>%s</div><div class=notedescription>%s</div>', $rows[$rowIndex][0], $rows[$rowIndex][1]);
+	$resultanthtml .= sprintf ('<div><div class=cardtitle><div class=notetitle>%s</div><div class=notedescription>%s</div>', htmlspecialchars($rows[$rowIndex][0]), htmlspecialchars($rows[$rowIndex][1]));
 
 	$option = array("EDIT", "DELETE", "START", "FINISH");
 	for ($i = 0; $i < count($option); $i++)
