@@ -44,8 +44,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && (($_REQUEST["title"] != "") && ($_
       <textarea name="description"></textarea>
 	</div>
 	<br>
+	<input type=button value=tasks>
 	<input type=submit value=submit>
     </form>
 <?php bannerbottom(); ?>
+<script>
+document.querySelector(".createtaskbox input[type=button]").addEventListener("click", function() {
+	location.href="list-task.php";
+});
+</script>
   </body>
 </html>

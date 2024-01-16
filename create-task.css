@@ -20,6 +20,13 @@
  .createtaskbox input[type=submit]{
 	font-family: "Lemon-Regular"
 }
+
+.createtaskbox input[type=button] {
+	font-family: "Lemon-Regular"
+
+}
+
+
  .createtaskbox input[type=text]{
 	background-color: #030303ff;
 	border-top: 0;
