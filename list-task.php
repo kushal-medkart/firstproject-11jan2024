@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Tasks</title>
+<link rel="icon" type="image/x-icon" href="/images/todo_bigsur.png">
 <link rel=stylesheet href="/background.css">
 <?php
 include_once "background.php";

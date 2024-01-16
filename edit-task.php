@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Title of the document</title>
+	<link rel="icon" type="image/x-icon" href="/images/todo_bigsur.png">
+
 <link rel=stylesheet href="/create-task.css">
 <?php
 include_once("background.php");
@@ -12,7 +14,8 @@ $dbname="todo";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
+// Check connection<link rel="icon" type="image/x-icon" href="/images/todo_bigsur.png">
+
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }

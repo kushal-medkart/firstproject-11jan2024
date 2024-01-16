@@ -2,6 +2,8 @@
 <html>
   <head>
 <title>Create Tasks</title>
+<link rel="icon" type="image/x-icon" href="/images/todo_bigsur.png">
+
 <link rel=stylesheet href="/create-task.css">
 <?php
 include_once("background.php");
