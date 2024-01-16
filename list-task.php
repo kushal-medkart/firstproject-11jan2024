@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>Edit Delete Task</title>
+<title>Tasks</title>
 <link rel=stylesheet href="/background.css">
 <?php
 include_once "background.php";

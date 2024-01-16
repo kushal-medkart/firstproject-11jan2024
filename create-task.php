@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-<title>Title of the document</title>
+<title>Create Tasks</title>
 <link rel=stylesheet href="/create-task.css">
 <?php
 include_once("background.php");
