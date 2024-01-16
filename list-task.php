@@ -112,7 +112,19 @@ echo $resultanthtml . "</div>";
 <?php bannerbottom(); ?>
 
 <?PHP $conn->close(); ?>
+
 <script> 
+const form = document.querySelector("form");
+form.addEventListener("submit", function(evt) {
+	const whichElement = evt.submitter.name;
+	if ((whichElement === "DELETE") && (confirm('Please confirm deletion') === false))
+	{
+		evt.preventDefault();
+//		window.history.back();
+	}
+});
+
+/*
 const deleteElems = document.querySelectorAll("button[name=DELETE]");
 for (const deleteElem of deleteElems)
 {
@@ -122,6 +134,7 @@ if (confirm('Please confirm deletion') === false) {
 }
 });
 }
+*/
 </script>
 </body>
 </html>
