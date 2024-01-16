@@ -36,11 +36,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && $_REQUEST["description"] != "") {
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
 	<div style="display:flex;">
       <span>Title:</span>
-	<?php echo '<input readonly="readonly" type="text" name="title" value='.$_REQUEST["title"].'>'; ?>
+	<?php echo '<input readonly="readonly" type="text" name="title" value='.htmlspecialchars($_REQUEST["title"]).'>'; ?>
 	</div>
 	<div style="display:flex;">
       <span>Description:</span>
-	<?php echo '<textarea name="description">'.$_REQUEST['description'].'</textarea>'; ?>
+	<?php echo '<textarea name="description">'.htmlspecialchars($_REQUEST['description']).'</textarea>'; ?>
 	</div>
 	<br>
 	<input type=submit value=submit>

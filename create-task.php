@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 }
 
 // valid title and descriptions are accepted
-if (($_SERVER["REQUEST_METHOD"] == "POST") && (($_REQUEST["title"] != "") && ($_REQUEST["description"] != ""))) {
+if (($_SERVER["REQUEST_METHOD"] === "POST") && (($_REQUEST["title"] !== "") && ($_REQUEST["description"] !== ""))) {
 	$stmt = $conn->prepare("INSERT INTO tasks VALUES (?, ?, FALSE)");
 	$stmt->bind_param("ss", $_REQUEST["title"], $_REQUEST["description"]);
 
@@ -50,7 +50,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && (($_REQUEST["title"] != "") && ($_
 <?php bannerbottom(); ?>
 <script>
 document.querySelector(".createtaskbox input[type=button]").addEventListener("click", function() {
-	location.href="list-task.php";
+	location.href="/list-task.php";
 });
 </script>
   </body>

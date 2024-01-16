@@ -32,7 +32,7 @@ function findTitleFromRowNum($conn, $row_num) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (isset($_REQUEST["DELETE"]) && $_REQUEST["DELETE"] != "null") {
+	if (isset($_REQUEST["DELETE"])) {
 		$sql = sprintf('SET @row_number = -1;');
 		$conn->query($sql);
 		// search with row number
@@ -114,27 +114,12 @@ echo $resultanthtml . "</div>";
 <?PHP $conn->close(); ?>
 
 <script> 
-const form = document.querySelector("form");
-form.addEventListener("submit", function(evt) {
-	const whichElement = evt.submitter.name;
-	if ((whichElement === "DELETE") && (confirm('Please confirm deletion') === false))
+document.querySelector("form").addEventListener("submit", function(evt) {
+	if ((evt.submitter.name === "DELETE") && (confirm('Please confirm deletion') === false))
 	{
 		evt.preventDefault();
-//		window.history.back();
 	}
 });
-
-/*
-const deleteElems = document.querySelectorAll("button[name=DELETE]");
-for (const deleteElem of deleteElems)
-{
-deleteElem.addEventListener("click", function(e) {
-if (confirm('Please confirm deletion') === false) {
-	e.srcElement.value = null;
-}
-});
-}
-*/
 </script>
 </body>
 </html>
