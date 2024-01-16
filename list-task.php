@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 function findTitleFromRowNum($conn, $row_num) {
 	$sql = 'SET @row_number = -1';
 	$conn->query($sql);
-	$stmt = $conn->prepare("select title,description from (SELECT title, description, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
+	$stmt = $conn->prepare("select title,description,status from (SELECT title, description,status, (@row_number:=@row_number + 1) AS row_num FROM tasks) as t where row_num=?");
 
 	$stmt->bind_param("s", $row_num);
 	$stmt->execute();
@@ -54,13 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		{
 			// update status value for given title
 			$stmt=$conn->prepare("UPDATE tasks set status=TRUE where title=?");
-			$stmt->bind_param("s", $_REQUEST["title"]);
+			$stmt->bind_param("s", $row["title"]);
 			$stmt->execute();
 			$stmt->close();
-			echo "TASK STARTED";
+			echo '<script type="text/javascript"> window.onload = function () { alert("TASK STARTED"); } </script>'; 
 
 		} else {
-			echo "TASK ALREADY STARTED";
+			echo '<script type="text/javascript"> window.onload = function () { alert("TASK ALREADY STARTED"); } </script>'; 
 		}
 	} else if (isset($_REQUEST["FINISH"])) {
 		$row=findTitleFromRowNum($conn, $_REQUEST["FINISH"]);
@@ -68,12 +68,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($row["status"] == TRUE)
 		{
 			$stmt=$conn->prepare("UPDATE tasks set status=FALSE where title=?");
-			$stmt->bind_param("s", $_REQUEST["title"]);
+			$stmt->bind_param("s", $row["title"]);
 			$stmt->execute();
 			$stmt->close();
-			echo "TASK COMPLETED";
+			echo '<script type="text/javascript"> window.onload = function () { alert("TASK COMPLETED"); } </script>'; 
 		} else {
-			echo "TASK ALREADY COMPLETED";
+			echo '<script type="text/javascript"> window.onload = function () { alert("TASK ALREADY COMPLETED"); } </script>'; 
 		}
 
 	}
