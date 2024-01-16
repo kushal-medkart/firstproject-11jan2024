@@ -2,7 +2,7 @@
 <html>
   <head>
 <title>Create Tasks</title>
-<link rel="icon" type="image/x-icon" href="/images/todo_list.png">
+<link rel="icon" type="image/x-icon" href="/images/todoico.png">
 
 <link rel=stylesheet href="/create-task.css">
 <?php
